@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-use constant VERSION => '0.2';
+use constant VERSION => '0.2.5';
 
 # Check if we got any command line arguments
 if (@ARGV) {
@@ -17,8 +17,13 @@ if (@ARGV) {
 	# Check what the argument is
 	while ($i <= $args) {
 	
-		# If it is a flag, set the next argument's value in a variable	
-		if ($ARGV[$i] eq "--grid") {
+		# If it is a flag, set the next argument's value in a variable
+		if (($ARGV[$i] eq "-d") || ($ARGV[$i] eq "--default")) {
+			# Create a grid with only the default settings.
+			makeGrid();
+			exit;
+			
+		} elsif ($ARGV[$i] eq "--grid") {
 			# The -g flag is to define the width of the entire grid
 			$g_width = $ARGV[$i + 1];
 			
@@ -54,7 +59,58 @@ if (@ARGV) {
 		
 		$i++;
 	}
+	makeGrid();
 	
+} else {
+	# No arguments
+	helpMe();
+}
+
+# The help dialog.
+# Displayed if the script is being run without command line
+# arguments or if the argument i -h or --help
+sub helpMe() {
+	print 'Gridmaker creates a CSS grid template.
+	
+	--grid NUMERIC VALUE
+		How wide should the entire grid be?
+		(DEFAULT 960)
+	
+	-c NUMERIC VALUE
+		How many columns should the grid consist of?
+		(DEFAULT 12)
+	
+	-a CSS SELECTOR
+		What parent element should the grid have? Use CSS
+		selectors (classes, ids or HTML elements).
+		(DEFAULT body)
+	
+	--gutter NUMERIC VALUE
+		The width of the gutter (DEFAULT 20)
+	
+	--maxwidth
+		The width values will be max-width instead of width.
+		(DEFAULT false)
+	
+	-d OR --default
+		Create a grid with only default values
+	
+	-h OR --help
+		Displays this help text.
+	
+	-v OR --version
+		Displays the version of Gridmaker';
+	
+	print "\n\n";
+}
+
+# Print version info
+sub printVersion() {
+	print "Gridmaker version " . (VERSION) . "\n\n";
+}
+
+# Create and print the grid
+sub makeGrid() {
 	# print the CSS for the ancestor
 	print $ancestor . ' {
 		';
@@ -88,55 +144,11 @@ if (@ARGV) {
 		
 		# Calculate and print the (max-)width of the columns.
 		print 'width: ' . (($g_width / $c_count - $gutter) * $i + (($i - 1) * $gutter)) . 'px;
-		margin: 0 20px;
+		margin: 0 ' . $gutter . ';
 	}
 	
 	';
 		$i++;
 	}
 	print "\n";
-	
-} else {
-	# No arguments
-	helpMe();
-}
-
-# The help dialog.
-# Displayed if the script is being run without command line
-# arguments or if the argument i -h or --help
-sub helpMe() {
-	print 'Gridmaker creates a CSS grid template.
-	
-	--grid NUMERIC VALUE
-		How wide should the entire grid be?
-		(DEFAULT 960)
-	
-	-c NUMERIC VALUE
-		How many columns should the grid consist of?
-		(DEFAULT 12)
-	
-	-a CSS SELECTOR
-		What parent element should the grid have? Use CSS
-		selectors (classes, ids or HTML elements).
-		(DEFAULT body)
-	
-	--gutter NUMERIC VALUE
-		The width of the gutter (DEFAULT 20)
-	
-	--maxwidth
-		The width values will be max-width instead of width.
-		(DEFAULT false)
-	
-	-h OR --help
-		Displays this help text.
-	
-	-v OR --version
-		Displays the version of Gridmaker';
-	
-	print "\n\n";
-}
-
-# Print version info
-sub printVersion() {
-	print "Gridmaker version " . (VERSION) . "\n\n";
 }

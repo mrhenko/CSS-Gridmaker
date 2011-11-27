@@ -25,6 +25,9 @@ Gridmaker creates a CSS grid template.
 		The width values will be max-width instead of width.
 		(DEFAULT false)
 	
+	-d OR --default
+		Create a grid with only default values
+	
 	-h OR --help
 		Displays this help text.
 	
@@ -33,6 +36,10 @@ Gridmaker creates a CSS grid template.
 
 VERSION HISTORY
 ---------------
+
+### 0.2.5
+* Enabled a default mode
+* Fixed a bug that meant that the gutter was always 20px, no matter what --gutter value was used.
 
 ### 0.2
 * First apperance of this file.
