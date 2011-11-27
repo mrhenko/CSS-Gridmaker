@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-use constant VERSION => '0.2.5';
+use constant VERSION => '0.2.5.1';
 
 # Check if we got any command line arguments
 if (@ARGV) {
@@ -144,7 +144,8 @@ sub makeGrid() {
 		
 		# Calculate and print the (max-)width of the columns.
 		print 'width: ' . (($g_width / $c_count - $gutter) * $i + (($i - 1) * $gutter)) . 'px;
-		margin: 0 ' . $gutter . ';
+		margin: 0 ' . $gutter / 2 . 'px;
+		float: left;
 	}
 	
 	';

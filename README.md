@@ -37,6 +37,10 @@ Gridmaker creates a CSS grid template.
 VERSION HISTORY
 ---------------
 
+### 0.2.5.1
+* Fixed a really bad bug with the gutters. Turns out it's a good idea to test your CSS in the 
+browser. (Who knew...)
+
 ### 0.2.5
 * Enabled a default mode
 * Fixed a bug that meant that the gutter was always 20px, no matter what --gutter value was used.
