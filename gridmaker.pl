@@ -1,36 +1,42 @@
 #!/usr/bin/perl
-use constant VERSION => '0.1.5';
+use constant VERSION => '0.2';
 
 # Check if we got any command line arguments
 if (@ARGV) {
 	# Count the number of command line arguments
 	$args = @ARGV;
 	
+	# Default values
+	$g_width = 960;
+	$c_count = 12;
+	$ancestor = 'body';
+	$gutter = 20;
+	
 	# Loop through the command line arguments
 	$i = 0;
-	
 	# Check what the argument is
 	while ($i <= $args) {
 	
 		# If it is a flag, set the next argument's value in a variable	
-		if ($ARGV[$i] eq "-g") {
+		if ($ARGV[$i] eq "--grid") {
 			# The -g flag is to define the width of the entire grid
 			$g_width = $ARGV[$i + 1];
-			print "Grid is " . $g_width . "px\n";
 			
 		} elsif ($ARGV[$i] eq "-c") {
 			# The -c flag is to set how many columns should be created
 			$c_count = $ARGV[$i + 1];
-			print "Column count is ". $c_count . "\n";
 			
 		} elsif ($ARGV[$i] eq "-a") {
 			# The -a flag is to define the ancestoral element
 			$ancestor = $ARGV[$i + 1];
-			print "Ancestor: " . $ancestor . "\n";
 			
 		} elsif ($ARGV[$i] eq "--maxwidth") {
 			# Use max-width instead of width, and width: 100%
 			$maxwidth = "true";
+			
+		} elsif ($ARGV[$i] eq "--gutter") {
+			# Gutter
+			$gutter = $ARGV[$i + 1];
 			
 		} elsif (($ARGV[$i] eq "-h") || ($ARGV[$i] eq "--help")) {
 			# Display the help
@@ -81,7 +87,7 @@ if (@ARGV) {
 		}
 		
 		# Calculate and print the (max-)width of the columns.
-		print 'width: ' . (($g_width / $c_count - 20) * $i + (($i - 1) * 20)) . 'px;
+		print 'width: ' . (($g_width / $c_count - $gutter) * $i + (($i - 1) * $gutter)) . 'px;
 		margin: 0 20px;
 	}
 	
@@ -101,18 +107,25 @@ if (@ARGV) {
 sub helpMe() {
 	print 'Gridmaker creates a CSS grid template.
 	
-	-g NUMERIC VALUE
+	--grid NUMERIC VALUE
 		How wide should the entire grid be?
+		(DEFAULT 960)
 	
 	-c NUMERIC VALUE
 		How many columns should the grid consist of?
+		(DEFAULT 12)
 	
 	-a CSS SELECTOR
 		What parent element should the grid have? Use CSS
 		selectors (classes, ids or HTML elements).
+		(DEFAULT body)
+	
+	--gutter NUMERIC VALUE
+		The width of the gutter (DEFAULT 20)
 	
 	--maxwidth
 		The width values will be max-width instead of width.
+		(DEFAULT false)
 	
 	-h OR --help
 		Displays this help text.
