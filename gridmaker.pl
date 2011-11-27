@@ -5,8 +5,10 @@ $args = @ARGV;
 
 # Loop through the command line arguments
 $i = 0;
+
+# Check what the argument is
 while ($i <= $args) {
-	# Check what the argument is
+
 	# If it is a flag, set the next argument's value in a variable	
 	if ($ARGV[$i] eq "-g") {
 		# The -g flag is to define the width of the entire grid
@@ -34,6 +36,7 @@ while ($i <= $args) {
 	$i++;
 }
 
+# print the CSS for the ancestor
 print $ancestor . ' {
 	';
 	
@@ -51,6 +54,8 @@ print $ancestor . ' {
 
 ';
 
+# Loop through the number of columns that should be used and
+# print the CSS for it.
 $i = 1;
 while ($i <= $c_count) {
 print $ancestor . ' .cols-' . $i. ' {
@@ -62,6 +67,7 @@ print $ancestor . ' .cols-' . $i. ' {
 	max-';
 	}
 	
+	# Calculate and print the (max-)width of the columns.
 	print 'width: ' . (($g_width / $c_count - 20) * $i + (($i - 1) * 20)) . 'px;
 	margin: 0 20px;
 }
