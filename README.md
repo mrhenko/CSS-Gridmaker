@@ -1,9 +1,9 @@
-Gridmaker
+CSS Gridmaker
 =========
 
 HELP
 ----
-Gridmaker creates a CSS grid template.
+CSS Gridmaker creates a CSS grid template.
 	
 	--grid NUMERIC VALUE
 		How wide should the entire grid be?
@@ -32,10 +32,13 @@ Gridmaker creates a CSS grid template.
 		Displays this help text.
 	
 	-v OR --version
-		Displays the version of Gridmaker
+		Displays the version of CSS Gridmaker
 
 VERSION HISTORY
 ---------------
+
+### 0.2.5.2
+Added the CSS prefix to the name to clarify.
 
 ### 0.2.5.1
 * Fixed a really bad bug with the gutters. Turns out it's a good idea to test your CSS in the 

@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-use constant VERSION => '0.2.5.1';
+use constant VERSION => '0.2.5.2';
 
 # Check if we got any command line arguments
 if (@ARGV) {
@@ -70,7 +70,7 @@ if (@ARGV) {
 # Displayed if the script is being run without command line
 # arguments or if the argument i -h or --help
 sub helpMe() {
-	print 'Gridmaker creates a CSS grid template.
+	print 'CSS Gridmaker creates a CSS grid template.
 	
 	--grid NUMERIC VALUE
 		How wide should the entire grid be?
@@ -99,14 +99,14 @@ sub helpMe() {
 		Displays this help text.
 	
 	-v OR --version
-		Displays the version of Gridmaker';
+		Displays the version of CSS Gridmaker';
 	
 	print "\n\n";
 }
 
 # Print version info
 sub printVersion() {
-	print "Gridmaker version " . (VERSION) . "\n\n";
+	print "CSS Gridmaker version " . (VERSION) . "\n\n";
 }
 
 # Create and print the grid
